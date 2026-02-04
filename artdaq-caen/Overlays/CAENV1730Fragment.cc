@@ -1,0 +1,13 @@
+#include "artdaq-caen/Overlays/CAENV1730Fragment.hh"
+#include "cetlib_except/exception.h"
+
+bool artdaqcaen::CAENV1730Fragment::Verify() const {
+
+  if(Metadata()->nChannels!=CAEN_V1730_MAX_CHANNELS)
+    return false;
+
+  if(ExpectedDataSize() != DataPayloadSize())
+    return false;
+
+  return true;
+}

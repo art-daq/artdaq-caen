@@ -4,10 +4,10 @@
 #ifndef _CAEN_EXCEPTION_H
 #define _CAEN_EXCEPTION_H
 
+#include <iostream>
 #include "CAENDecoder.hh"
 #include "CAENDigitizerType.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
-#include <iostream>
 
 namespace artdaqcaen
 {

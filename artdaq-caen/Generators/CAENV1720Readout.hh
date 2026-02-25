@@ -17,7 +17,7 @@
 
 #include "CAENConfiguration.hh"
 
-//#include "CircularBuffer.hh"
+// #include "CircularBuffer.hh"
 #include "PoolBuffer.hh"
 #include "workerThread.hh"
 
@@ -205,7 +205,7 @@ class CAENV1720Readout : public artdaq::CommandableFragmentGenerator
 	bool                        WaitForTrigger(uint32_t iboard);
 	bool                        GetData();
 	share::WorkerThreadUPtr     GetData_thread_;
-	artdaqcaen::PoolBuffer     fPoolBuffer;
+	artdaqcaen::PoolBuffer      fPoolBuffer;
 	size_t                      fCircularBufferSize;
 	std::unique_ptr<uint16_t[]> fBuffer;
 
@@ -223,15 +223,14 @@ class CAENV1720Readout : public artdaq::CommandableFragmentGenerator
 	uint32_t                      fTTT;
 	long                          fTTT_ns;
 
+	// maps, first index is fragment ID
+	std::map<int, bool>                          in_spill_;
+	std::map<int, artdaq::Fragment::timestamp_t> spill_start_timestamp_;
+	std::chrono::steady_clock::time_point        last_frag_time_;
+	int                                          spill_timeout_ms_;
+	size_t                                       subrun_number_{1};
 
-        //maps, first index is fragment ID
-        std::map<int, bool>                                  in_spill_;
-        std::map<int, artdaq::Fragment::timestamp_t>         spill_start_timestamp_;
-        std::chrono::steady_clock::time_point                last_frag_time_;
-	int                                                  spill_timeout_ms_;
-	size_t                                               subrun_number_{1};
-
-        double clock_ns_per_tick_;   //double just in case we use some non-standard clock frequency
+	double clock_ns_per_tick_;  // double just in case we use some non-standard clock frequency
 
 	void CheckReadback(std::string, int, uint32_t, uint32_t, int channelID = -1);
 

@@ -17,7 +17,7 @@
 
 #include "CAENConfiguration.hh"
 
-//#include "CircularBuffer.hh"
+// #include "CircularBuffer.hh"
 #include "PoolBuffer.hh"
 #include "workerThread.hh"
 
@@ -140,25 +140,25 @@ class CAENV1720SpillReadout : public artdaq::CommandableFragmentGenerator
 	};
 
 	// fhicl parameters
-	int      fVerbosity;
-	int      fBoardChainNumber;
-        uint32_t fNLinks;
-        std::vector<uint32_t> fNBoardsPerLink;
-	uint32_t fNBoards;
-	uint8_t  fInterruptEnable;
-	uint32_t fIRQTimeoutMS;
-	uint32_t fGetNextSleep;
-	uint32_t fGetNextFragmentBunchSize;
-	uint32_t fMaxEventsPerTransfer;
-	bool     fSWTrigger;
-	uint32_t fSelfTriggerMode;
-	uint32_t fSelfTriggerMask;
-	uint32_t fModeLVDS;
-	uint32_t fTrigOutDelay;
-	uint32_t fTrigInLevel;
-	bool     fCombineReadoutWindows;
-	uint32_t fFragmentID;
-	bool     fConfigureAfterSpill;
+	int                   fVerbosity;
+	int                   fBoardChainNumber;
+	uint32_t              fNLinks;
+	std::vector<uint32_t> fNBoardsPerLink;
+	uint32_t              fNBoards;
+	uint8_t               fInterruptEnable;
+	uint32_t              fIRQTimeoutMS;
+	uint32_t              fGetNextSleep;
+	uint32_t              fGetNextFragmentBunchSize;
+	uint32_t              fMaxEventsPerTransfer;
+	bool                  fSWTrigger;
+	uint32_t              fSelfTriggerMode;
+	uint32_t              fSelfTriggerMask;
+	uint32_t              fModeLVDS;
+	uint32_t              fTrigOutDelay;
+	uint32_t              fTrigInLevel;
+	bool                  fCombineReadoutWindows;
+	uint32_t              fFragmentID;
+	bool                  fConfigureAfterSpill;
 
 	bool     fUseTimeTagForTimeStamp;
 	uint32_t fTimeOffsetNanoSec;
@@ -177,13 +177,13 @@ class CAENV1720SpillReadout : public artdaq::CommandableFragmentGenerator
 	// internals
 	size_t fNChannels;
 	// uint32_t fBoardID; //too hard to manage potential problems if this is a member variable!
-	bool     fOK;
-	bool     fail_GetNext;
+	bool                            fOK;
+	bool                            fail_GetNext;
 	artdaq::Fragment::sequence_id_t fEvCounter;  // set to zero at the beginning
-	uint32_t last_rcvd_rwcounter;
-	uint32_t last_sent_rwcounter;
-	uint32_t last_sent_ts;
-	uint32_t total_data_size;
+	uint32_t                        last_rcvd_rwcounter;
+	uint32_t                        last_sent_rwcounter;
+	uint32_t                        last_sent_ts;
+	uint32_t                        total_data_size;
 	// uint32_t event_size;
 	uint32_t n_readout_windows;
 	uint32_t ch_temps[CAENConfiguration::MAX_CHANNELS];
@@ -208,7 +208,7 @@ class CAENV1720SpillReadout : public artdaq::CommandableFragmentGenerator
 	bool                        WaitForTrigger(uint32_t iboard);
 	bool                        GetData();
 	share::WorkerThreadUPtr     GetData_thread_;
-	artdaqcaen::PoolBuffer     fPoolBuffer;
+	artdaqcaen::PoolBuffer      fPoolBuffer;
 	size_t                      fCircularBufferSize;
 	std::unique_ptr<uint16_t[]> fBuffer;
 
@@ -234,7 +234,7 @@ class CAENV1720SpillReadout : public artdaq::CommandableFragmentGenerator
 	int                                          spill_timeout_ms_;
 	size_t                                       subrun_number_{1};
 
-        double clock_ns_per_tick_;   //double just in case we use some non-standard clock frequency
+	double clock_ns_per_tick_;  // double just in case we use some non-standard clock frequency
 
 	void CheckReadback(std::string, int, uint32_t, uint32_t, int channelID = -1);
 

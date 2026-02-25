@@ -22,4 +22,3 @@ cet_build_plugin(CAENV1730WaveformAna art::module
     ROOT::Hist
     ROOT::Tree
 )
-

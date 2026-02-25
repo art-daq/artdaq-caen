@@ -47,59 +47,59 @@ artdaqcaen::CAENV1720SpillReadout::CAENV1720SpillReadout(fhicl::ParameterSet con
 	uint32_t fBoardID = -1;
 
 	// TML: loop over links and boards per link
-	for (unsigned int ilink = 0; ilink < fNLinks; ilink ++)
+	for(unsigned int ilink = 0; ilink < fNLinks; ilink++)
 	{
-	  for (unsigned int iboard = 0; iboard < fNBoardsPerLink[ilink]; iboard++)
-	    {
-	        fBoardID++;
-		fHandle.push_back(-1);
-
-		TLOG(TCONFIG) << ": Using BoardID=" << fBoardID << " with NChannels=" << fNChannels;
-
-		TLOG(TDEBUG) << " Calling CAEN_DGTZ_OpenDigitizer(" << CAEN_DGTZ_OpticalLink << ", " << ilink << ", "
-		             << iboard << ", " << 0 << " , " << fHandle[fBoardID] << ")";  // AA: debug
-		retcode = CAEN_DGTZ_OpenDigitizer(CAEN_DGTZ_OpticalLink, ilink, iboard, 0, &fHandle[fBoardID]);
-		TLOG(TDEBUG) << "BoardID: " << fBoardID << " fHandle: " << fHandle[fBoardID];  // TML debug
-
-		fOK = true;
-
-		if(retcode != CAEN_DGTZ_Success)
+		for(unsigned int iboard = 0; iboard < fNBoardsPerLink[ilink]; iboard++)
 		{
-			artdaqcaen::CAENDecoder::checkError(retcode, "OpenDigitizer", fBoardID);
-			CAEN_DGTZ_CloseDigitizer(fHandle[fBoardID]);
-			fHandle[fBoardID] = -1;
-			fOK               = false;
-			TLOG(TLVL_ERROR) << ": Fatal error configuring CAEN board at " << ilink << ", " << iboard;
-			TLOG(TLVL_ERROR) << __func__ << ": Terminating process";
-			abort();
-		}
+			fBoardID++;
+			fHandle.push_back(-1);
 
-		retcode = CAEN_DGTZ_Reset(fHandle[fBoardID]);
-		artdaqcaen::CAENDecoder::checkError(retcode, "Reset", fBoardID);
+			TLOG(TCONFIG) << ": Using BoardID=" << fBoardID << " with NChannels=" << fNChannels;
 
-		sleep(1);
-		Configure(fBoardID);
+			TLOG(TDEBUG) << " Calling CAEN_DGTZ_OpenDigitizer(" << CAEN_DGTZ_OpticalLink << ", " << ilink << ", "
+			             << iboard << ", " << 0 << " , " << fHandle[fBoardID] << ")";  // AA: debug
+			retcode = CAEN_DGTZ_OpenDigitizer(CAEN_DGTZ_OpticalLink, ilink, iboard, 0, &fHandle[fBoardID]);
+			TLOG(TDEBUG) << "BoardID: " << fBoardID << " fHandle: " << fHandle[fBoardID];  // TML debug
 
-		retcode = CAEN_DGTZ_ReadRegister(fHandle[fBoardID], FP_TRG_OUT_CONTROL, &data);
-		TLOG(TLVL_INFO) << "Reg:0x" << std::hex << FP_TRG_OUT_CONTROL << "=0x" << data;
+			fOK = true;
 
-		retcode = CAEN_DGTZ_ReadRegister(fHandle[fBoardID], FP_IO_CONTROL, &data);
-		TLOG(TLVL_INFO) << "Reg:0x" << std::hex << FP_IO_CONTROL << "=0x" << data;
+			if(retcode != CAEN_DGTZ_Success)
+			{
+				artdaqcaen::CAENDecoder::checkError(retcode, "OpenDigitizer", fBoardID);
+				CAEN_DGTZ_CloseDigitizer(fHandle[fBoardID]);
+				fHandle[fBoardID] = -1;
+				fOK               = false;
+				TLOG(TLVL_ERROR) << ": Fatal error configuring CAEN board at " << ilink << ", " << iboard;
+				TLOG(TLVL_ERROR) << __func__ << ": Terminating process";
+				abort();
+			}
 
-		// TML: Comment out LVDS parts - not using for EMPHATIC
-		// retcode = CAEN_DGTZ_ReadRegister(fHandle[fBoardID],FP_LVDS_CONTROL,&data);
-		// TLOG(TLVL_INFO) << "Reg:0x" << std::hex << FP_LVDS_CONTROL << "=0x" <<
-		//   data << std::dec;
+			retcode = CAEN_DGTZ_Reset(fHandle[fBoardID]);
+			artdaqcaen::CAENDecoder::checkError(retcode, "Reset", fBoardID);
 
-		if(!fOK)
-		{
-			CAEN_DGTZ_CloseDigitizer(fHandle[fBoardID]);
-			TLOG(TLVL_ERROR) << ": Fatal error configuring CAEN board at " << ilink << ", " << iboard;
-			TLOG(TLVL_ERROR) << __func__ << ": Terminating process";
-			abort();
-		}
-	    } // end loop over board (in link)
-	}  // end loop over links
+			sleep(1);
+			Configure(fBoardID);
+
+			retcode = CAEN_DGTZ_ReadRegister(fHandle[fBoardID], FP_TRG_OUT_CONTROL, &data);
+			TLOG(TLVL_INFO) << "Reg:0x" << std::hex << FP_TRG_OUT_CONTROL << "=0x" << data;
+
+			retcode = CAEN_DGTZ_ReadRegister(fHandle[fBoardID], FP_IO_CONTROL, &data);
+			TLOG(TLVL_INFO) << "Reg:0x" << std::hex << FP_IO_CONTROL << "=0x" << data;
+
+			// TML: Comment out LVDS parts - not using for EMPHATIC
+			// retcode = CAEN_DGTZ_ReadRegister(fHandle[fBoardID],FP_LVDS_CONTROL,&data);
+			// TLOG(TLVL_INFO) << "Reg:0x" << std::hex << FP_LVDS_CONTROL << "=0x" <<
+			//   data << std::dec;
+
+			if(!fOK)
+			{
+				CAEN_DGTZ_CloseDigitizer(fHandle[fBoardID]);
+				TLOG(TLVL_ERROR) << ": Fatal error configuring CAEN board at " << ilink << ", " << iboard;
+				TLOG(TLVL_ERROR) << __func__ << ": Terminating process";
+				abort();
+			}
+		}  // end loop over board (in link)
+	}      // end loop over links
 
 	// Old version without loop:
 	// TLOG(TCONFIG) << ": Using BoardID=" << fBoardID << " with NChannels="
@@ -273,7 +273,7 @@ void artdaqcaen::CAENV1720SpillReadout::loadConfiguration(fhicl::ParameterSet co
 	TLOG(TINFO) << __func__ << ": NLinks=" << fNLinks;
 
 	fNBoardsPerLink = ps.get<std::vector<uint32_t> >("NBoardsPerLink");
-	//TLOG(TINFO) << __func__ << ": NBoardsPerLink=" << fNBoardsPerLink;
+	// TLOG(TINFO) << __func__ << ": NBoardsPerLink=" << fNBoardsPerLink;
 
 	fNBoards = ps.get<uint32_t>("NBoards");
 	TLOG(TINFO) << __func__ << ": NBoards=" << fNBoards;
@@ -343,7 +343,7 @@ void artdaqcaen::CAENV1720SpillReadout::loadConfiguration(fhicl::ParameterSet co
 	fConfigureAfterSpill = ps.get<bool>("configure_after_spill", false);
 	TLOG(TINFO) << __func__ << ": fConfigureAfterSpill: " << std::boolalpha << fConfigureAfterSpill;
 
-        clock_ns_per_tick_     = ps.get<int>("clock_ns_per_tick", 8);
+	clock_ns_per_tick_ = ps.get<int>("clock_ns_per_tick", 8);
 }
 
 void artdaqcaen::CAENV1720SpillReadout::Configure(unsigned int iboard)
@@ -574,9 +574,9 @@ artdaqcaen::CAENV1720SpillReadout::~CAENV1720SpillReadout()
 //  bitmask: bitmask to override only the bits that need to change while leaving the rest
 //  unchanged
 CAEN_DGTZ_ErrorCode artdaqcaen::CAENV1720SpillReadout::WriteRegisterBitmask(int32_t  handle,
-                                                                             uint32_t address,
-                                                                             uint32_t data,
-                                                                             uint32_t bitmask)
+                                                                            uint32_t address,
+                                                                            uint32_t data,
+                                                                            uint32_t bitmask)
 {
 	// int32_t ret = CAEN_DGTZ_Success;
 	CAEN_DGTZ_ErrorCode ret = CAEN_DGTZ_Success;
@@ -706,17 +706,17 @@ void artdaqcaen::CAENV1720SpillReadout::ConfigureTrigger(uint32_t iboard)
 	retcode = CAEN_DGTZ_ReadRegister(fHandle[fBoardID], TRG_OUT_WIDTH, &readback);
 	CheckReadback("SetGlobalTriggerPulseWidthAll", fBoardID, fCAEN.triggerPulseWidth, readback);
 	// Readback must be channel by channel (see reg doc)
-	//for(uint32_t ch = 0; ch < CAENConfiguration::MAX_CHANNELS; ch++)
-	  //{
-	  //uint32_t address = TRG_OUT_WIDTH_CH | (ch << 8);
-		//retcode          = CAEN_DGTZ_ReadRegister(fHandle[fBoardID], address, &readback);
-		// TLOG(TLVL_DEBUG) << "CAEN_DGTZ_ReadRegister("<<fHandle[fBoardID]<<",
-		// "<<address<<", "<<readback<<") returned "<<retcode; //AA: debuggin
-		//CheckReadback("SetGlobalTriggerPulseWidth", fBoardID, fCAEN.triggerPulseWidth, readback);
-		//TML commenting out for now since we don't really care that this is throwing an error.
-		// if(fCAEN.triggerPulseWidth != readback)
-		// 	TLOG(TLVL_DEBUG) << "SetGlobalTriggerPulseWidth failed for channel " << ch;
-		//}
+	// for(uint32_t ch = 0; ch < CAENConfiguration::MAX_CHANNELS; ch++)
+	//{
+	// uint32_t address = TRG_OUT_WIDTH_CH | (ch << 8);
+	// retcode          = CAEN_DGTZ_ReadRegister(fHandle[fBoardID], address, &readback);
+	// TLOG(TLVL_DEBUG) << "CAEN_DGTZ_ReadRegister("<<fHandle[fBoardID]<<",
+	// "<<address<<", "<<readback<<") returned "<<retcode; //AA: debuggin
+	// CheckReadback("SetGlobalTriggerPulseWidth", fBoardID, fCAEN.triggerPulseWidth, readback);
+	// TML commenting out for now since we don't really care that this is throwing an error.
+	// if(fCAEN.triggerPulseWidth != readback)
+	// 	TLOG(TLVL_DEBUG) << "SetGlobalTriggerPulseWidth failed for channel " << ch;
+	//}
 
 	ConfigureSelfTriggerMode(fBoardID);
 
@@ -1107,10 +1107,10 @@ bool artdaqcaen::CAENV1720SpillReadout::readWindowDataBlocksFromBoard(unsigned i
 	auto t_IRQWait_start = boost::posix_time::microsec_clock::universal_time();  // AA: added for debugging
 	// wait for one event, then interrupt
 	// AA: why do we call this function if we disabled interrupt mode in the fhicl file?!
-//	CAEN_DGTZ_ErrorCode retcode = CAEN_DGTZ_IRQWait(fHandle[fBoardID], fIRQTimeoutMS); //AA, Jan 31, commented
+	//	CAEN_DGTZ_ErrorCode retcode = CAEN_DGTZ_IRQWait(fHandle[fBoardID], fIRQTimeoutMS); //AA, Jan 31, commented
 	// CAEN_DGTZ_ErrorCode retcode = CAEN_DGTZ_IRQWait(fHandle[0], fIRQTimeoutMS);
-	CAEN_DGTZ_ErrorCode retcode = CAEN_DGTZ_Success; //AA, Jan 31, uncommented
-	auto t_IRQWait_end = boost::posix_time::microsec_clock::universal_time();
+	CAEN_DGTZ_ErrorCode retcode       = CAEN_DGTZ_Success;  // AA, Jan 31, uncommented
+	auto                t_IRQWait_end = boost::posix_time::microsec_clock::universal_time();
 	TLOG(TGETDATA) << "(iboard=" << iboard << ")"
 	               << "CAEN_DGTZ_IRQWait took " << (t_IRQWait_end - t_IRQWait_start).total_milliseconds() << " ms ";
 
@@ -1568,7 +1568,8 @@ bool artdaqcaen::CAENV1720SpillReadout::readSingleWindowFragments(artdaq::Fragme
 
 			for(auto& frags : spill_fragments_)
 			{
-				fragments.emplace_back(new artdaq::Fragment(subrun_number_, frags.first, artdaq::Fragment::ContainerFragmentType));
+				fragments.emplace_back(
+				    new artdaq::Fragment(subrun_number_, frags.first, artdaq::Fragment::ContainerFragmentType));
 				fragments.back()->setTimestamp(0);  // Container Fragments always have timestamp 0
 				artdaq::ContainerFragmentLoader cfl(*fragments.back());
 				cfl.set_missing_data(false);
@@ -1624,8 +1625,11 @@ bool artdaqcaen::CAENV1720SpillReadout::readSingleWindowFragments(artdaq::Fragme
 		while(iter < end)
 		{
 			TLOG(21) << __func__ << ": b4 FragmentBytes";
-			auto fragment_uptr = artdaq::Fragment::FragmentBytes(
-			    fragment_datasize_bytes, fEvCounter, fFragmentID, artdaqcaen::detail::FragmentType::CAENV1720, metadata);
+			auto fragment_uptr = artdaq::Fragment::FragmentBytes(fragment_datasize_bytes,
+			                                                     fEvCounter,
+			                                                     fFragmentID,
+			                                                     artdaqcaen::detail::FragmentType::CAENV1720,
+			                                                     metadata);
 
 			TLOG(21) << __func__ << ": b4 memcpy poolBuffer->Fragment";
 			memcpy(fragment_uptr->dataBegin(), iter, fragment_uptr->dataSizeBytes());
@@ -1659,7 +1663,8 @@ bool artdaqcaen::CAENV1720SpillReadout::readSingleWindowFragments(artdaq::Fragme
 			}
 			const uint64_t rollover_shift =
 			    (ts_frag >= spill_start_timestamp_[thisFragmentID]) ? 0 : 0x7fffffff;  // 2³¹–1
-			uint64_t fragment_timestamp = (ts_frag + rollover_shift - spill_start_timestamp_[thisFragmentID]) * clock_ns_per_tick_;
+			uint64_t fragment_timestamp =
+			    (ts_frag + rollover_shift - spill_start_timestamp_[thisFragmentID]) * clock_ns_per_tick_;
 			// fragment_timestamp += (static_cast<uint64_t>(subrun_number_) << 48);
 			fragment_uptr->setTimestamp(fragment_timestamp);
 

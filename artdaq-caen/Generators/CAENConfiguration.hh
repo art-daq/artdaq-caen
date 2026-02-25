@@ -14,57 +14,57 @@ namespace artdaqcaen
 class CAENConfiguration
 {
   public:
-  enum
-  {
-    MAX_BOARDS = 6,
-    MAX_CHANNELS = 8
-  };
+	enum
+	{
+		MAX_BOARDS   = 6,
+		MAX_CHANNELS = 8
+	};
 
-  virtual ~CAENConfiguration() {}
-  CAENConfiguration(fhicl::ParameterSet const & ps);
+	virtual ~CAENConfiguration() {}
+	CAENConfiguration(fhicl::ParameterSet const& ps);
 
-    int  link;
-    int  firstBoardId;
-    int  nBoards;
-    int  enableReadout;
-    int  boardId;
-    int  recordLength;
-    int  postPercent;
-    int  eventsPerInterrupt;
-    int  irqWaitTime;
-    bool allowTriggerOverlap;
-    bool usePedestals;
-    int  dacValue;
-    int  dynamicRange;
-    int  ioLevel;
-    int  nChannels;
-    int  triggerPolarity;
-    uint16_t triggerThresholds[MAX_CHANNELS];
-    uint8_t   triggerPulseWidth;
-    int  extTrgMode;
-    int  swTrgMode;
-    int  selfTrgMode;
-    int  acqMode;
-    int  debugLevel;
-    int  runSyncMode;
-    int  outputSignalMode;
-    int  eventCounterWarning;
-    int  memoryAlmostFull;
-    int  readoutMode;
-    int  analogMode;
-    int  testPattern;
-    int  pedestal[MAX_CHANNELS];
-    int  channelEnable[MAX_CHANNELS];
-    int  channelSelfTrgLogic[MAX_CHANNELS/2];
-    int  channelSelfTrgPulseType[MAX_CHANNELS/2];
+	int      link;
+	int      firstBoardId;
+	int      nBoards;
+	int      enableReadout;
+	int      boardId;
+	int      recordLength;
+	int      postPercent;
+	int      eventsPerInterrupt;
+	int      irqWaitTime;
+	bool     allowTriggerOverlap;
+	bool     usePedestals;
+	int      dacValue;
+	int      dynamicRange;
+	int      ioLevel;
+	int      nChannels;
+	int      triggerPolarity;
+	uint16_t triggerThresholds[MAX_CHANNELS];
+	uint8_t  triggerPulseWidth;
+	int      extTrgMode;
+	int      swTrgMode;
+	int      selfTrgMode;
+	int      acqMode;
+	int      debugLevel;
+	int      runSyncMode;
+	int      outputSignalMode;
+	int      eventCounterWarning;
+	int      memoryAlmostFull;
+	int      readoutMode;
+	int      analogMode;
+	int      testPattern;
+	int      pedestal[MAX_CHANNELS];
+	int      channelEnable[MAX_CHANNELS];
+	int      channelSelfTrgLogic[MAX_CHANNELS / 2];
+	int      channelSelfTrgPulseType[MAX_CHANNELS / 2];
 
-    uint32_t  channelEnableMask;
-    uint32_t  channelSelfTrgMask;
-
+	uint32_t channelEnableMask;
+	uint32_t channelSelfTrgMask;
 };
-}
+}  // namespace artdaqcaen
 
-inline std::ostream& operator<<(std::ostream& os, const artdaqcaen::CAENConfiguration& e) {
+inline std::ostream& operator<<(std::ostream& os, const artdaqcaen::CAENConfiguration& e)
+{
 	os << "CAEN Configuration" << std::endl;
 	os << "  Link                  " << e.link << std::endl;
 	os << "  nBoards               " << e.nBoards << std::endl;
@@ -159,4 +159,3 @@ inline TraceStreamer& operator<<(TraceStreamer& ts, const artdaqcaen::CAENConfig
 }
 
 #endif
-

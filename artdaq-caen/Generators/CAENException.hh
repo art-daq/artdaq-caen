@@ -7,18 +7,19 @@
 #include "CAENDigitizerType.h"
 #include "CAENDecoder.hh"
 #include "messagefacility/MessageLogger/MessageLogger.h"
+#include <iostream>
 
 namespace artdaqcaen
 {
 class CAENException: public std::exception
 {
-  public: 
+  public:
 
-  CAEN_DGTZ_ErrorCode error; 
+  CAEN_DGTZ_ErrorCode error;
   std::string label;
   int boardId;
 
-  CAENException(CAEN_DGTZ_ErrorCode error_, 
+  CAENException(CAEN_DGTZ_ErrorCode error_,
 		std::string label_,
 		int boardId_);
 
@@ -29,5 +30,5 @@ class CAENException: public std::exception
 }
 
 std::ostream& operator<<(std::ostream& s, const artdaqcaen::CAENException& e);
- 
+
 #endif

@@ -7,6 +7,7 @@
 #include "CAENDecoder.hh"
 #include "CAENDigitizerType.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
+#include <iostream>
 
 namespace artdaqcaen
 {

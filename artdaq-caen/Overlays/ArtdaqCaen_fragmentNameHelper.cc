@@ -22,20 +22,18 @@ class CaenFragmentNameHelper : public artdaq::FragmentNameHelper
 	/**
 	 * \brief CaenFragmentNameHelper Constructor
 	 */
-	CaenFragmentNameHelper(
-	    std::string unidentified_instance_name,
-	    std::vector<std::pair<artdaq::Fragment::type_t, std::string>> extraTypes);
+	CaenFragmentNameHelper(std::string                                                   unidentified_instance_name,
+	                       std::vector<std::pair<artdaq::Fragment::type_t, std::string>> extraTypes);
 
   private:
-	CaenFragmentNameHelper(CaenFragmentNameHelper const&)                     = delete;
-	CaenFragmentNameHelper(CaenFragmentNameHelper&&)                       = delete;
-	CaenFragmentNameHelper& operator=(CaenFragmentNameHelper const&)          = delete;
-	CaenFragmentNameHelper& operator=(CaenFragmentNameHelper&&)               = delete;
+	CaenFragmentNameHelper(CaenFragmentNameHelper const&)            = delete;
+	CaenFragmentNameHelper(CaenFragmentNameHelper&&)                 = delete;
+	CaenFragmentNameHelper& operator=(CaenFragmentNameHelper const&) = delete;
+	CaenFragmentNameHelper& operator=(CaenFragmentNameHelper&&)      = delete;
 };
 
-CaenFragmentNameHelper::CaenFragmentNameHelper(
-    std::string unidentified_instance_name,
-    std::vector<std::pair<artdaq::Fragment::type_t, std::string>> extraTypes)
+CaenFragmentNameHelper::CaenFragmentNameHelper(std::string unidentified_instance_name,
+                                               std::vector<std::pair<artdaq::Fragment::type_t, std::string>> extraTypes)
     : FragmentNameHelper(unidentified_instance_name, extraTypes)
 {
 	TLOG(TLVL_DEBUG) << "CaenFragmentNameHelper CONSTRUCTOR START";

@@ -325,9 +325,9 @@ void artdaqcaen::CAENV1720Readout::loadConfiguration(fhicl::ParameterSet const& 
 	fTimeOffsetNanoSec = ps.get<uint32_t>("TimeOffsetNanoSec", 0);  // 0ms by default
 	TLOG(TINFO) << __func__ << ": fTimeOffsetNanoSec=" << fTimeOffsetNanoSec;
 
-	spill_timeout_ms_      = ps.get<int>("spill_timeout_ms", 5000);
-	
-        clock_ns_per_tick_     = ps.get<int>("clock_ns_per_tick", 8);
+	spill_timeout_ms_ = ps.get<int>("spill_timeout_ms", 5000);
+
+	clock_ns_per_tick_ = ps.get<int>("clock_ns_per_tick", 8);
 }
 
 void artdaqcaen::CAENV1720Readout::Configure(unsigned int iboard)
@@ -558,9 +558,9 @@ artdaqcaen::CAENV1720Readout::~CAENV1720Readout()
 //  bitmask: bitmask to override only the bits that need to change while leaving the rest
 //  unchanged
 CAEN_DGTZ_ErrorCode artdaqcaen::CAENV1720Readout::WriteRegisterBitmask(int32_t  handle,
-                                                                        uint32_t address,
-                                                                        uint32_t data,
-                                                                        uint32_t bitmask)
+                                                                       uint32_t address,
+                                                                       uint32_t data,
+                                                                       uint32_t bitmask)
 {
 	// int32_t ret = CAEN_DGTZ_Success;
 	CAEN_DGTZ_ErrorCode ret = CAEN_DGTZ_Success;
@@ -1531,16 +1531,18 @@ bool artdaqcaen::CAENV1720Readout::readSingleWindowFragments(artdaq::FragmentPtr
 		::usleep(fGetNextSleep);
 		start = std::chrono::steady_clock::now();
 
-                //AA: use only first fragmentID to determine whether to start new spill.
-                //an alternative would be to use any fragmentID but that could fail in
-                //case the very first spill misses some fragments.
-                //This method would fail only if first fragmentID board was completely dead
-		if(in_spill_[fFragmentID] == true &&  std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - last_frag_time_)
-		       .count() > spill_timeout_ms_)
+		// AA: use only first fragmentID to determine whether to start new spill.
+		// an alternative would be to use any fragmentID but that could fail in
+		// case the very first spill misses some fragments.
+		// This method would fail only if first fragmentID board was completely dead
+		if(in_spill_[fFragmentID] == true &&
+		   std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - last_frag_time_)
+		           .count() > spill_timeout_ms_)
 		{
-			for(auto & s : in_spill_) {
-                          s.second = false;
-                        }
+			for(auto& s : in_spill_)
+			{
+				s.second = false;
+			}
 
 			artdaq::FragmentPtr endOfSubrunFrag(new artdaq::Fragment(static_cast<size_t>(
 
@@ -1555,7 +1557,6 @@ bool artdaqcaen::CAENV1720Readout::readSingleWindowFragments(artdaq::FragmentPtr
 			*endOfSubrunFrag->dataBegin() = my_rank;
 
 			fragments.emplace_back(std::move(endOfSubrunFrag));
-
 		}
 
 		return true;
@@ -1595,31 +1596,31 @@ bool artdaqcaen::CAENV1720Readout::readSingleWindowFragments(artdaq::FragmentPtr
 		                   << " readoutwindow_event_counter = " << readoutwindow_event_counter;
 
 		// TML: setting fragment ID with header board ID
-                const int & thisFragmentID = header->boardID;
+		const int& thisFragmentID = header->boardID;
 		fragment_uptr->setFragmentID(header->boardID);
 
+		// AA: compute timestamp for EMPHATIC 2022
+		// timestamp is defined as time in ns since the first event of the spill
 
-                //AA: compute timestamp for EMPHATIC 2022
-                //timestamp is defined as time in ns since the first event of the spill
-                
-		//artdaq::Fragment::timestamp_t
-                uint64_t ts_frag = header->triggerTime();
-		if(!in_spill_[thisFragmentID]) {
-			in_spill_[thisFragmentID] = true;
+		// artdaq::Fragment::timestamp_t
+		uint64_t ts_frag = header->triggerTime();
+		if(!in_spill_[thisFragmentID])
+		{
+			in_spill_[thisFragmentID]              = true;
 			spill_start_timestamp_[thisFragmentID] = ts_frag;
 		}
-                const uint64_t rollover_shift = (ts_frag >= spill_start_timestamp_[thisFragmentID]) ? 0 : 0x7fffffff; //2³¹–1
-		uint64_t fragment_timestamp = (ts_frag + rollover_shift - spill_start_timestamp_[thisFragmentID]) * clock_ns_per_tick_;
-		//fragment_timestamp += (static_cast<uint64_t>(subrun_number_) << 48);
+		const uint64_t rollover_shift = (ts_frag >= spill_start_timestamp_[thisFragmentID]) ? 0 : 0x7fffffff;  // 2³¹–1
+		uint64_t fragment_timestamp =
+		    (ts_frag + rollover_shift - spill_start_timestamp_[thisFragmentID]) * clock_ns_per_tick_;
+		// fragment_timestamp += (static_cast<uint64_t>(subrun_number_) << 48);
 		fragment_uptr->setTimestamp(fragment_timestamp);
-
 
 		// auto readoutwindow_event_counter_gap= readoutwindow_event_counter -
 		// last_sent_rwcounter;
 
 		TLOG(TMAKEFRAG) << __func__ << ": Created fragment " << fFragmentID << " for event "
 		                << readoutwindow_event_counter << " triggerTimeTag " << header->triggerTimeTag
-		                << " ts=" << fragment_timestamp; 
+		                << " ts=" << fragment_timestamp;
 
 		/*
 		if( readoutwindow_event_counter_gap > 1u ){

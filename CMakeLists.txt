@@ -8,9 +8,9 @@
 
 
 # use cmake 3.17 or later
-cmake_minimum_required (VERSION 3.17)
+cmake_minimum_required (VERSION 3.19 FATAL_ERROR)
 
-find_package(cetmodules)
+find_package(cetmodules 3.16.00 REQUIRED)
 
 project(artdaq-caen VERSION 1.01.00)
 
@@ -42,11 +42,7 @@ find_package( caenvmelib v2_50 )
 find_package( caencomm v1_2a )
 find_package( caendigitizer v2_7_2 )
 
-# macros for art_dictionary and simple_plugin
-#include(ArtDictionary)
-include(ArtMake)
 include(BuildPlugins)
-include(CetTest)
 
 # Code
 add_subdirectory(artdaq-caen)

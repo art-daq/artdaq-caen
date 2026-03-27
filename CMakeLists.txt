@@ -56,4 +56,8 @@ add_subdirectory(test)
 # Documentation directory
 add_subdirectory(doc)
 
+# CMake module files
+FILE(COPY Modules DESTINATION .)
+INSTALL(DIRECTORY Modules DESTINATION .)
+
 cet_cmake_config()

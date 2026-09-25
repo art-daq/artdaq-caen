@@ -38,9 +38,9 @@ cet_set_compiler_flags(DIAGS VIGILANT
  find_package( artdaq-utilities 3.05.00 REQUIRED QUIET)
 
 #CAEN libraries
-find_package( caenvmelib v2_50 )
-find_package( caencomm v1_2a )
-find_package( caendigitizer v2_7_2 )
+find_package( caenvmelib v2_50 REQUIRED)
+find_package( caencomm v1_2a REQUIRED)
+find_package( caendigitizer v2_7_2 REQUIRED)
 
 include(BuildPlugins)
 

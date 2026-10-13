@@ -21,6 +21,7 @@
 #include "workerThread.hh"
 
 #include <mutex>
+#include <memory>
 #include <string>
 #include <unordered_map>
 

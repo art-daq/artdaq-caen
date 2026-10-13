@@ -4,12 +4,12 @@
 #include <atomic>
 #include <future>
 #include <memory>
-
 #include <list>
 #include <sstream>
 #include <type_traits>
 #include <utility>
 #include <vector>
+#include <string>
 
 namespace share
 {

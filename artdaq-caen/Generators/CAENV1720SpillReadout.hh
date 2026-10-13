@@ -23,7 +23,10 @@
 
 #include <mutex>
 #include <string>
+#include <memory>
 #include <unordered_map>
+#include <map>
+#include <vector>
 
 namespace artdaqcaen
 {

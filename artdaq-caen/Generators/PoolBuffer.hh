@@ -1,6 +1,8 @@
 #ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_POOLBUFFER_HH_
 #define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_POOLBUFFER_HH_
 
+#include "TRACE/trace.h"
+
 #include <algorithm>
 #include <array>
 #include <cassert>
@@ -10,12 +12,13 @@
 #include <list>
 #include <mutex>
 #include <queue>
+#include <memory>
 #include <sstream>
 #include <stack>
+#include <string>
 #include <thread>
 #include <utility>
-
-#include "TRACE/trace.h"
+#include <vector>
 
 using namespace std::string_literals;
 

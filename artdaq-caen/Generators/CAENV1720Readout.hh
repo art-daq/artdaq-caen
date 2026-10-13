@@ -6,24 +6,27 @@
 #ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENV1720READOUT_HH_
 #define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENV1720READOUT_HH_
 
+#include "artdaq-caen/Overlays/CAENV1720Fragment.hh"
+
+#include "artdaq-caen/Generators/CAENConfiguration.hh"
+#include "artdaq-caen/Generators/PoolBuffer.hh"
+#include "artdaq-caen/Generators/workerThread.hh"
+
 #include "artdaq-core/Data/Fragment.hh"
 #include "artdaq/Generators/CommandableFragmentGenerator.hh"
+
 #include "fhiclcpp/fwd.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
 #include "CAENDigitizer.h"
 #include "CAENDigitizerType.h"
-#include "artdaq-caen/Overlays/CAENV1720Fragment.hh"
-
-#include "CAENConfiguration.hh"
-
-// #include "CircularBuffer.hh"
-#include "PoolBuffer.hh"
-#include "workerThread.hh"
 
 #include <mutex>
 #include <string>
 #include <unordered_map>
+#include <vector>
+#include <memory>
+#include <map>
 
 namespace artdaqcaen
 {

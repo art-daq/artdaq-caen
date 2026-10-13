@@ -1,11 +1,12 @@
 #include "PoolBuffer.hh"
 #define TRACE_NAME "PoolBuffer"
+
 #include <future>
 #include <iomanip>
 #include <iostream>
-
 #include <sstream>
 #include <thread>
+#include <string>
 
 using artdaqcaen::PoolBuffer;
 

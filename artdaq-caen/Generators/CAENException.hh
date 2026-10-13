@@ -4,10 +4,12 @@
 #ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENEXCEPTION_HH_
 #define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENEXCEPTION_HH_
 
-#include <iostream>
 #include "CAENDecoder.hh"
 #include "CAENDigitizerType.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
+
+#include <iostream>
+#include <string>
 
 namespace artdaqcaen
 {

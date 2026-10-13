@@ -1,6 +1,11 @@
 #ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_FRAGMENTTYPE_HH_
 #define ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_FRAGMENTTYPE_HH_
+
 #include "artdaq-core/Data/Fragment.hh"
+
+#include <string>
+#include <map>
+#include <vector>
 
 namespace artdaqcaen
 {

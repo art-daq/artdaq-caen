@@ -1,5 +1,5 @@
-#ifndef artdaq_caen_Overlays_FragmentType_hh
-#define artdaq_caen_Overlays_FragmentType_hh
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_FRAGMENTTYPE_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_FRAGMENTTYPE_HH_
 #include "artdaq-core/Data/Fragment.hh"
 
 namespace artdaqcaen
@@ -42,4 +42,4 @@ std::string fragmentTypeToString(FragmentType val);
  */
 std::map<artdaq::Fragment::type_t, std::string> makeFragmentTypeMap();
 }  // namespace artdaqcaen
-#endif /* artdaq_caen_core_Overlays_FragmentType_hh */
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_FRAGMENTTYPE_HH_

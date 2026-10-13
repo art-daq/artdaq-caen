@@ -1,6 +1,6 @@
 
-#ifndef _CAENDecoder_h
-#define _CAENDecoder_h
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENDECODER_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENDECODER_HH_
 
 #include <atomic>
 #include <type_traits>
@@ -184,4 +184,4 @@ class CAENDecoder
 };
 }  // namespace artdaqcaen
 
-#endif
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENDECODER_HH_

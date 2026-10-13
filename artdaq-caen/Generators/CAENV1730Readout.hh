@@ -2,8 +2,8 @@
 //  emphatic-artdaq/Generators/CAENV1730Readout.hh
 //
 
-#ifndef artdaq_caen_Generators_CAENV1730Readout_hh
-#define artdaq_caen_Generators_CAENV1730Readout_hh
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENV1730READOUT_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENV1730READOUT_HH_
 
 #include "artdaq-core/Data/Fragment.hh"
 #include "artdaq/Generators/CommandableFragmentGenerator.hh"
@@ -313,4 +313,4 @@ class CAENV1730Readout : public artdaq::CommandableFragmentGenerator
 
 }  // namespace artdaqcaen
 
-#endif
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENV1730READOUT_HH_

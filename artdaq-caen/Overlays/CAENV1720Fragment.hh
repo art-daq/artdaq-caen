@@ -1,5 +1,5 @@
-#ifndef artdaq_caen_Overlays_CAENV1720Fragment_hh
-#define artdaq_caen_Overlays_CAENV1720Fragment_hh
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_CAENV1720FRAGMENT_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_CAENV1720FRAGMENT_HH_
 
 #include "artdaq-core/Data/Fragment.hh"
 #include "cetlib_except/exception.h"
@@ -95,4 +95,4 @@ class artdaqcaen::CAENV1720Fragment
 	artdaq::Fragment fFragment;
 };
 
-#endif /* emphaticdaq_datatypes_Overlays_CAENV1720Fragment_hh */
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_OVERLAYS_CAENV1720FRAGMENT_HH_

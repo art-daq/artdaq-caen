@@ -2,8 +2,8 @@
 //  CAENConfiguration.h   (W.Badgett)
 //
 
-#ifndef _CAENConfiguration_h
-#define _CAENConfiguration_h
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENCONFIGURATION_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENCONFIGURATION_HH_
 
 #include <iostream>
 #include "CAENDecoder.hh"
@@ -158,4 +158,4 @@ inline TraceStreamer& operator<<(TraceStreamer& ts, const artdaqcaen::CAENConfig
 	return ts;
 }
 
-#endif
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENCONFIGURATION_HH_

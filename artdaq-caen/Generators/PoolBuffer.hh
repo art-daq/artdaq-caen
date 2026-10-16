@@ -1,5 +1,7 @@
-#ifndef _PoolBuffer_H_
-#define _PoolBuffer_H_
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_POOLBUFFER_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_POOLBUFFER_HH_
+
+#include "TRACE/trace.h"
 
 #include <algorithm>
 #include <array>
@@ -8,14 +10,15 @@
 #include <condition_variable>
 #include <cstdlib>
 #include <list>
+#include <memory>
 #include <mutex>
 #include <queue>
 #include <sstream>
 #include <stack>
+#include <string>
 #include <thread>
 #include <utility>
-
-#include "trace.h"
+#include <vector>
 
 using namespace std::string_literals;
 
@@ -405,4 +408,4 @@ inline std::size_t PoolBuffer::allocate(std::size_t block_size,
 	return _poolBufferSize;
 }
 }  // namespace artdaqcaen
-#endif  // _PoolBuffer_H_
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_POOLBUFFER_HH_

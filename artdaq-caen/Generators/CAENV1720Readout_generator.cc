@@ -6,7 +6,7 @@
 #define TRACE_NAME "CAENV1720Readout"
 #include "artdaq/DAQdata/Globals.hh"
 
-#include "CAENV1720Readout.hh"
+#include "artdaq-caen/Generators/CAENV1720Readout.hh"
 #include "artdaq/Generators/GeneratorMacros.hh"
 
 #include <time.h>
@@ -15,7 +15,7 @@
 #include <sstream>
 
 #include <algorithm>
-#include "CAENDecoder.hh"
+#include "artdaq-caen/Generators/CAENDecoder.hh"
 #include "artdaq-caen/Overlays/FragmentType.hh"
 
 #include "boost/date_time/microsec_time_clock.hpp"

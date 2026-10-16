@@ -150,7 +150,7 @@ void artdaqcaen::CAENV1730Dump::analyze(const art::Event& evt)
 		// bool firstEvt = true;
 		//  aiwu: hardcoded number of fragments
 		for(size_t idx = 0; idx < rawFragHandle->size(); ++idx)
-		{ /*loop over the fragments*/
+		{  // loop over the fragments
 			//--use this fragment as a reference to the same data
 			const auto&           frag((*rawFragHandle)[idx]);
 			CAENV1730Fragment     bb(frag);
@@ -207,8 +207,8 @@ void artdaqcaen::CAENV1730Dump::analyze(const art::Event& evt)
 				// dumpouttext<<fEvent<<"\t"<<idx<<"\t"<<i_ch<<std::endl;
 				for(size_t i_t = 0; i_t < wfm_length; ++i_t)
 				{
-					fTicksVec[i_t] = t0 * Ttt_DownSamp + i_t;      /*timestamps, event level*/
-					value_ptr      = data_begin + ch_offset + i_t; /*pointer arithmetic*/
+					fTicksVec[i_t] = t0 * Ttt_DownSamp + i_t;       // timestamps, event level
+					value_ptr      = data_begin + ch_offset + i_t;  // pointer arithmetic
 					value          = *(value_ptr);
 
 					if(i_ch == 0 && firstEvt)

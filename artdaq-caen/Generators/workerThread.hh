@@ -1,12 +1,12 @@
-#ifndef _UBOONE_SHARE_WORKERTHREAD_H
-#define _UBOONE_SHARE_WORKERTHREAD_H 1
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_WORKERTHREAD_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_WORKERTHREAD_HH_
 
 #include <atomic>
 #include <future>
-#include <memory>
-
 #include <list>
+#include <memory>
 #include <sstream>
+#include <string>
 #include <type_traits>
 #include <utility>
 #include <vector>
@@ -80,4 +80,4 @@ class WorkerThread
 
 }  // end of namespace share
 
-#endif  //_UBOONE_SHARE_WORKERTHREAD_H
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_WORKERTHREAD_HH_

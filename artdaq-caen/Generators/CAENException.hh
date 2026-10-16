@@ -1,13 +1,15 @@
 //
 //  CAENException.h (W.Badgett)
 //
-#ifndef _CAEN_EXCEPTION_H
-#define _CAEN_EXCEPTION_H
+#ifndef ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENEXCEPTION_HH_
+#define ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENEXCEPTION_HH_
 
-#include <iostream>
 #include "CAENDecoder.hh"
 #include "CAENDigitizerType.h"
 #include "messagefacility/MessageLogger/MessageLogger.h"
+
+#include <iostream>
+#include <string>
 
 namespace artdaqcaen
 {
@@ -28,4 +30,4 @@ class CAENException : public std::exception
 
 std::ostream& operator<<(std::ostream& s, const artdaqcaen::CAENException& e);
 
-#endif
+#endif  // ARTDAQ_CAEN_ARTDAQ_CAEN_GENERATORS_CAENEXCEPTION_HH_

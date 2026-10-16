@@ -20,12 +20,12 @@ namespace artdaqcaen
 class CAENDecoder
 {
   public:
-	const static char* zeit(char delimiter = ':');
+	static const char* zeit(char delimiter = ':');
 	static void        commError(CAENComm_ErrorCode retcod, const std::string label);
 	static void        vmeError(CVErrorCodes retcod, const std::string label);
 	static void        checkError(CAEN_DGTZ_ErrorCode err, const std::string label, int boardId = -1);
 
-	const static std::string CAENError(CAEN_DGTZ_ErrorCode err)
+	static const std::string CAENError(CAEN_DGTZ_ErrorCode err)
 	{
 		static const std::map<CAEN_DGTZ_ErrorCode, std::string> errors{
 		    {CAEN_DGTZ_Success, "CAEN_DGTZ_Success"},
@@ -64,7 +64,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string AnalogMonOutput(CAEN_DGTZ_AnalogMonitorOutputMode_t mode)
+	static const std::string AnalogMonOutput(CAEN_DGTZ_AnalogMonitorOutputMode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_AnalogMonitorOutputMode_t, std::string> table{
 		    {CAEN_DGTZ_AM_TRIGGER_MAJORITY, "CAEN_DGTZ_AM_TRIGGER_MAJORITY"},
@@ -78,7 +78,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string ZeroSuppressionMode(CAEN_DGTZ_ZS_Mode_t mode)
+	 static const std::string ZeroSuppressionMode(CAEN_DGTZ_ZS_Mode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_ZS_Mode_t, std::string> table{{CAEN_DGTZ_ZS_NO, "CAEN_DGTZ_ZS_NO"},
 		                                                              {CAEN_DGTZ_ZS_NO, "CAEN_DGTZ_ZS_INT"},
@@ -90,7 +90,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string AcquisitionMode(CAEN_DGTZ_AcqMode_t mode)
+	static const std::string AcquisitionMode(CAEN_DGTZ_AcqMode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_AcqMode_t, std::string> table{
 		    {CAEN_DGTZ_SW_CONTROLLED, "CAEN_DGTZ_SW_CONTROLLED"},
@@ -101,7 +101,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string OutputSignalMode(CAEN_DGTZ_OutputSignalMode_t mode)
+	static const std::string OutputSignalMode(CAEN_DGTZ_OutputSignalMode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_OutputSignalMode_t, std::string> table{
 		    {CAEN_DGTZ_TRIGGER, "CAEN_DGTZ_TRIGGER"},
@@ -114,7 +114,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string RunSynchronizationMode(CAEN_DGTZ_RunSyncMode_t mode)
+	static const std::string RunSynchronizationMode(CAEN_DGTZ_RunSyncMode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_RunSyncMode_t, std::string> table{
 		    {CAEN_DGTZ_RUN_SYNC_Disabled, "CAEN_DGTZ_RUN_SYNC_Disabled"},
@@ -128,7 +128,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string TriggerPolarity(CAEN_DGTZ_TriggerPolarity_t mode)
+	static const std::string TriggerPolarity(CAEN_DGTZ_TriggerPolarity_t mode)
 	{
 		static const std::map<CAEN_DGTZ_TriggerPolarity_t, std::string> table{
 		    {CAEN_DGTZ_TriggerOnRisingEdge, "CAEN_DGTZ_TriggerOnRisingEdge"},
@@ -139,7 +139,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string TriggerMode(CAEN_DGTZ_TriggerMode_t mode)
+	static const std::string TriggerMode(CAEN_DGTZ_TriggerMode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_TriggerMode_t, std::string> table{
 		    {CAEN_DGTZ_TRGMODE_DISABLED, "CAEN_DGTZ_TRGMODE_DISABLED"},
@@ -152,7 +152,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string EnaDisMode(CAEN_DGTZ_EnaDis_t mode)
+	static const std::string EnaDisMode(CAEN_DGTZ_EnaDis_t mode)
 	{
 		static const std::map<CAEN_DGTZ_EnaDis_t, std::string> table{{CAEN_DGTZ_DISABLE, "CAEN_DGTZ_DISABLE"},
 		                                                             {CAEN_DGTZ_ENABLE, "CAEN_DGTZ_ENABLE"}};
@@ -162,7 +162,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string IRQMode(CAEN_DGTZ_IRQMode_t mode)
+	static const std::string IRQMode(CAEN_DGTZ_IRQMode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_IRQMode_t, std::string> table{
 		    {CAEN_DGTZ_IRQ_MODE_ROAK, "CAEN_DGTZ_IRQ_MODE_ROAK"}, {CAEN_DGTZ_IRQ_MODE_RORA, "CAEN_DGTZ_IRQ_MODE_RORA"}};
@@ -172,7 +172,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	const static std::string IOLevel(CAEN_DGTZ_IOLevel_t mode)
+	static const std::string IOLevel(CAEN_DGTZ_IOLevel_t mode)
 	{
 		static const std::map<CAEN_DGTZ_IOLevel_t, std::string> table{{CAEN_DGTZ_IOLevel_NIM, "CAEN_DGTZ_IOLevel_NIM"},
 		                                                              {CAEN_DGTZ_IOLevel_TTL, "CAEN_DGTZ_IOLevel_TTL"}};

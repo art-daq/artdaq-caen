@@ -3,13 +3,13 @@
 
 #include <atomic>
 #include <future>
-#include <memory>
 #include <list>
+#include <memory>
 #include <sstream>
+#include <string>
 #include <type_traits>
 #include <utility>
 #include <vector>
-#include <string>
 
 namespace share
 {

@@ -21,11 +21,11 @@
 #include "PoolBuffer.hh"
 #include "workerThread.hh"
 
+#include <map>
+#include <memory>
 #include <mutex>
 #include <string>
-#include <memory>
 #include <unordered_map>
-#include <map>
 #include <vector>
 
 namespace artdaqcaen

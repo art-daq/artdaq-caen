@@ -21,12 +21,12 @@
 #include "CAENDigitizer.h"
 #include "CAENDigitizerType.h"
 
+#include <map>
+#include <memory>
 #include <mutex>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <memory>
-#include <map>
 
 namespace artdaqcaen
 {

@@ -20,8 +20,8 @@
 #include "PoolBuffer.hh"
 #include "workerThread.hh"
 
-#include <mutex>
 #include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 

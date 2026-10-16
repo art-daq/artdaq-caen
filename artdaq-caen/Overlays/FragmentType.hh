@@ -3,8 +3,8 @@
 
 #include "artdaq-core/Data/Fragment.hh"
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
 
 namespace artdaqcaen

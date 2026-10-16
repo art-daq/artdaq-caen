@@ -78,7 +78,7 @@ class CAENDecoder
 		return it->second;
 	}
 
-	 static const std::string ZeroSuppressionMode(CAEN_DGTZ_ZS_Mode_t mode)
+	static const std::string ZeroSuppressionMode(CAEN_DGTZ_ZS_Mode_t mode)
 	{
 		static const std::map<CAEN_DGTZ_ZS_Mode_t, std::string> table{{CAEN_DGTZ_ZS_NO, "CAEN_DGTZ_ZS_NO"},
 		                                                              {CAEN_DGTZ_ZS_NO, "CAEN_DGTZ_ZS_INT"},

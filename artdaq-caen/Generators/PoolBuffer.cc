@@ -5,8 +5,8 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
-#include <thread>
 #include <string>
+#include <thread>
 
 using artdaqcaen::PoolBuffer;
 

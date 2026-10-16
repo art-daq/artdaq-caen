@@ -2,9 +2,9 @@
 
 #include <algorithm>
 #include <cassert>
+#include <map>
 #include <string>
 #include <vector>
-#include <map>
 
 artdaqcaen::FragmentType artdaqcaen::toFragmentType(std::string t_string)
 {

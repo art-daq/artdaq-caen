@@ -10,9 +10,9 @@
 #include <condition_variable>
 #include <cstdlib>
 #include <list>
+#include <memory>
 #include <mutex>
 #include <queue>
-#include <memory>
 #include <sstream>
 #include <stack>
 #include <string>
